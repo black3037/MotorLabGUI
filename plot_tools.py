@@ -28,8 +28,9 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         constant_line_gain = [0]*w
         
         # Plot Formatting
+        plt.figure("Bode")
         plt.ion()
-        plt.close(2)
+        #plt.close("Bode")
         f, axarr = plt.subplots(2, sharex=True)
         plt.subplot(211)
         plt.semilogx(w,mag,'dodgerblue')
@@ -41,7 +42,6 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         plt.semilogx(w, phase,'dodgerblue')
         plt.ylabel('Phase (Deg)')
         plt.xlabel('Frequency (rad/s)')
-        plt.figure(2)
         
         return plt.show()
     
@@ -50,11 +50,12 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         w, mag, phase = signal.bode((num,den))
         
         # Plot formatting
+        plt.figure("Bode")
         plt.ion()
-        plt.close(2)
+        #plt.close("Bode")
         plt.rc('font', family='serif')
         plt.rc('xtick', labelsize='x-small')
-        plt.rc('ytick', labelsize='x-small')     
+        plt.rc('ytick', labelsize='x-small')    
         f, axarr = plt.subplots(2, sharex=True)
         plt.subplot(211)
         plt.semilogx(w,mag,'black')
@@ -66,7 +67,10 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         plt.ylabel('Phase (Deg)')
         plt.xlabel('Frequency (rad/s)')
         plt.grid(True,which="both")
-        plt.figure(2)
+        
+        return plt.show()
+        
+    def plotdata(self,x,y):
         
         return plt.show()
     
@@ -79,13 +83,13 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         dcgain = [get_last_value]*len(t)
      
         # Plot Formatting
+        plt.figure("Step Response")
         plt.ion()
-        plt.close(1)
+        #plt.close("Step Response")
         plt.plot(t,y,'dodgerblue',t,dcgain,'k:')
         plt.xlabel('Time (seconds)')
         plt.ylabel('Amplitude')
         plt.title('Step Response')
-        plt.figure(1)
         
         return plt.show()
             
@@ -98,11 +102,12 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         dcgain = [get_last_value]*len(t)
         
         # Plot Formatting
+        plt.figure("Step Response")  
         plt.ion()
-        plt.close(1)
+        #plt.close("Step Response")
         plt.rc('font', family='serif')
         plt.rc('xtick', labelsize='x-small')
-        plt.rc('ytick', labelsize='x-small')            
+        plt.rc('ytick', labelsize='x-small')     
         plt.plot(t,y,'black',label='Model')
         plt.plot(t,dcgain,'k:',label='Command')
         plt.fill_between(t,y,dcgain,color='lightgrey',alpha=0.3)
@@ -110,7 +115,6 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         plt.ylabel('Amplitude')
         plt.title('Step Response')
         plt.legend(loc='lower right')
-        plt.figure(1)
         
         return plt.show()
           
