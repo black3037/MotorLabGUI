@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_Motorlab(object):
     def setupUi(self, Motorlab):
         Motorlab.setObjectName(_fromUtf8("Motorlab"))
-        Motorlab.setFixedSize(810, 730)
+        Motorlab.resize(844, 785)
         Motorlab.setAutoFillBackground(False)
         Motorlab.setDocumentMode(False)
         self.centralWidget = QtGui.QWidget(Motorlab)
@@ -232,7 +232,6 @@ class Ui_Motorlab(object):
         font.setWeight(50)
         self.SampleRate.setFont(font)
         self.SampleRate.setAlignment(QtCore.Qt.AlignCenter)
-
         self.SampleRate.setObjectName(_fromUtf8("SampleRate"))
         self.DataCollectionLayout.addWidget(self.SampleRate, 0, 1, 1, 1)
         self.DataButtonGroup = QtGui.QGroupBox(self.DataCollectionGroup)
@@ -453,7 +452,7 @@ class Ui_Motorlab(object):
         font.setBold(False)
         font.setWeight(50)
         self.PlotAutoFormatCheckBox.setFont(font)
-        self.PlotAutoFormatCheckBox.setChecked(False)
+        self.PlotAutoFormatCheckBox.setChecked(True)
         self.PlotAutoFormatCheckBox.setObjectName(_fromUtf8("PlotAutoFormatCheckBox"))
         self.horizontalLayout_5.addWidget(self.PlotAutoFormatCheckBox)
         self.ExperimentCheckBox = QtGui.QCheckBox(self.horizontalLayoutWidget_5)
@@ -495,7 +494,6 @@ class Ui_Motorlab(object):
         font.setWeight(50)
         self.Numerator.setFont(font)
         self.Numerator.setAlignment(QtCore.Qt.AlignCenter)
-
         self.Numerator.setObjectName(_fromUtf8("Numerator"))
         self.gridLayout.addWidget(self.Numerator, 1, 0, 1, 1)
         self.Denominator = QtGui.QLineEdit(self.gridLayoutWidget)
@@ -504,7 +502,6 @@ class Ui_Motorlab(object):
         font.setWeight(50)
         self.Denominator.setFont(font)
         self.Denominator.setAlignment(QtCore.Qt.AlignCenter)
-
         self.Denominator.setObjectName(_fromUtf8("Denominator"))
         self.gridLayout.addWidget(self.Denominator, 3, 0, 1, 1)
         self.NumeratorLabel = QtGui.QLabel(self.gridLayoutWidget)
@@ -606,18 +603,12 @@ class Ui_Motorlab(object):
         self.gridLayout_2.setMargin(11)
         self.gridLayout_2.setSpacing(6)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
-
-
-
-
         self.JogUpButton = QtGui.QPushButton(self.gridLayoutWidget_5)
         self.JogUpButton.setObjectName(_fromUtf8("JogUpButton"))
         self.gridLayout_2.addWidget(self.JogUpButton, 0, 0, 1, 1)
         self.JogDownButton = QtGui.QPushButton(self.gridLayoutWidget_5)
         self.JogDownButton.setObjectName(_fromUtf8("JogDownButton"))
         self.gridLayout_2.addWidget(self.JogDownButton, 1, 0, 1, 1)
-
-
         self.verticalLayoutWidget_3 = QtGui.QWidget(self.ManualCommandGroup)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(110, 20, 91, 101))
         self.verticalLayoutWidget_3.setObjectName(_fromUtf8("verticalLayoutWidget_3"))
@@ -738,6 +729,9 @@ class Ui_Motorlab(object):
         self.SpeedLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.SpeedLabel.setObjectName(_fromUtf8("SpeedLabel"))
         self.gridLayout_3.addWidget(self.SpeedLabel, 1, 0, 1, 1)
+        self.pushButton = QtGui.QPushButton(self.centralWidget)
+        self.pushButton.setGeometry(QtCore.QRect(290, 700, 241, 23))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
         Motorlab.setCentralWidget(self.centralWidget)
         self.menuBar = QtGui.QMenuBar(Motorlab)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 844, 21))
@@ -784,7 +778,7 @@ class Ui_Motorlab(object):
         self.CollectDataButton.setText(_translate("Motorlab", "Collect Data", None))
         self.StopButton.setText(_translate("Motorlab", "Stop", None))
         self.StartAndCollectButton.setText(_translate("Motorlab", "Start + Collect", None))
-        self.OpenDirectoryButton.setText(_translate("Motorlab", "Open Directory", None))
+        self.OpenDirectoryButton.setText(_translate("Motorlab", "Change Directory", None))
         self.GenerateFileButton.setText(_translate("Motorlab", "Generate File", None))
         self.DataExplorerGroup.setTitle(_translate("Motorlab", "Data Explorer", None))
         self.DataExplorer.setHtml(_translate("Motorlab", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -806,8 +800,8 @@ class Ui_Motorlab(object):
         self.ExperimentCheckBox.setText(_translate("Motorlab", "Experiment", None))
         self.ModelGroup.setTitle(_translate("Motorlab", "Model", None))
         self.TransferFunctionGroup.setTitle(_translate("Motorlab", "Transfer Function", None))
-        self.Numerator.setText(_translate("Motorlab", "1,2", None))
-        self.Denominator.setText(_translate("Motorlab", "1,0.7,2", None))
+        self.Numerator.setText(_translate("Motorlab", "s + 2", None))
+        self.Denominator.setText(_translate("Motorlab", "s^2 + 2*s + 3", None))
         self.NumeratorLabel.setText(_translate("Motorlab", "Numerator", None))
         self.DenominatorLabel.setText(_translate("Motorlab", "Denominator", None))
         self.InputGroup.setTitle(_translate("Motorlab", "Input", None))
@@ -836,4 +830,5 @@ class Ui_Motorlab(object):
         self.Speed.setText(_translate("Motorlab", "0", None))
         self.Position.setText(_translate("Motorlab", "0", None))
         self.SpeedLabel.setText(_translate("Motorlab", "Speed (RPM)", None))
+        self.pushButton.setText(_translate("Motorlab", "Open Python", None))
 
