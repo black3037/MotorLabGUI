@@ -8,7 +8,7 @@ Simple plotting tools for the MotorLab GUI
 # ***************************************************************************#
 from PyQt4.QtGui import QMainWindow
 
-from MotorLab import Ui_Motorlab
+from MotorLab_Ui import Ui_Motorlab
 
 import matplotlib.pyplot as plt
 

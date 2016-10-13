@@ -4,7 +4,7 @@ from PyQt4 import QtGui
 
 from PyQt4.QtGui import QMainWindow, QColor, QFileDialog
 
-from MotorLab import Ui_Motorlab
+from MotorLab_Ui import Ui_Motorlab
 
 from plot_tools import plot_tools
 
@@ -30,6 +30,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.OpenPython.clicked.connect(self.open_python_interpreter)
         
     def get_step(self):
+        
         self.get_graph = plot_tools()
         num,den = self.transferfunction()
         
@@ -37,13 +38,13 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         else: self.get_graph.stepmodel(num,den)
         
     def get_bode(self):
+        
         num,den = self.transferfunction()
         self.get_graph = plot_tools()
         
         if self.PlotAutoFormatCheckBox.isChecked(): self.get_graph.bode2(num,den)
         else: self.get_graph.bode(num,den)
             
-        
     def change_directory(self,current_directory):
         
         text,ok = QtGui.QInputDialog.getText(self,'Change Working Directory','Enter the full path to working directory:')
@@ -60,6 +61,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         fileout.write('Hello World')
         
     def get_current_working_directory(self):
+        
         return os.curdir
         
     def jogdown(self):
@@ -90,6 +92,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         #TODO: Have this work for Linux and OSX
             
     def open_python_interpreter(self):
+        
         if sys.platform == 'win32':
             os.system("start cmd /c python")
     
@@ -102,8 +105,6 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             self.StartButton.setText('Start')
             self.DataExplorer.setText('MotorLab stopped')
             
-        
-            
     def transferfunction(self):
     
         numerator = str(self.Numerator.text())
@@ -114,12 +115,3 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         
         return num,den
             
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    app.setStyle('cleanlooks')
-    window = MotorLabMainWindow()
-    window.show()
-    sys.exit(app.exec_())
-
