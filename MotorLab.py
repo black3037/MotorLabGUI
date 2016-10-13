@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_Motorlab(object):
     def setupUi(self, Motorlab):
         Motorlab.setObjectName(_fromUtf8("Motorlab"))
-        Motorlab.resize(844, 785)
+        Motorlab.setFixedSize(810, 760)
         Motorlab.setAutoFillBackground(False)
         Motorlab.setDocumentMode(False)
         self.centralWidget = QtGui.QWidget(Motorlab)
@@ -800,8 +800,8 @@ class Ui_Motorlab(object):
         self.ExperimentCheckBox.setText(_translate("Motorlab", "Experiment", None))
         self.ModelGroup.setTitle(_translate("Motorlab", "Model", None))
         self.TransferFunctionGroup.setTitle(_translate("Motorlab", "Transfer Function", None))
-        self.Numerator.setText(_translate("Motorlab", "s + 2", None))
-        self.Denominator.setText(_translate("Motorlab", "s^2 + 2*s + 3", None))
+        self.Numerator.setText(_translate("Motorlab", "1,2", None))
+        self.Denominator.setText(_translate("Motorlab", "1,0.7,3", None))
         self.NumeratorLabel.setText(_translate("Motorlab", "Numerator", None))
         self.DenominatorLabel.setText(_translate("Motorlab", "Denominator", None))
         self.InputGroup.setTitle(_translate("Motorlab", "Input", None))
