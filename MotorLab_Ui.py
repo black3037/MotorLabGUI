@@ -768,7 +768,7 @@ class Ui_Motorlab(object):
         self.FileName.setText(_translate("Motorlab", "Data", None))
         self.SampleRateLabel.setText(_translate("Motorlab", "Sample Rate (Hz)", None))
         self.FileVariableNameLabel.setText(_translate("Motorlab", "File/Variable Name", None))
-        self.Duration.setText(_translate("Motorlab", "2.34", None))
+        self.Duration.setText(_translate("Motorlab", "5", None))
         self.SampleCount.setText(_translate("Motorlab", "500", None))
         self.SampleCountLabel.setText(_translate("Motorlab", "Sample Count", None))
         self.DurationLabel.setText(_translate("Motorlab", "Duration (sec)", None))

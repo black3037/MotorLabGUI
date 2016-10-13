@@ -9,6 +9,8 @@ from MotorLab_Ui import Ui_Motorlab
 from plot_tools import plot_tools
 
 import os
+
+import sys
 # ***************************************************************************#
 # ***************************************************************************#
 
@@ -19,15 +21,31 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         QMainWindow.__init__(self)
         self.setupUi(self)
         
-        # Push Button Signal --> Slot
+        #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        #%%%%%%%%%%%%%%%%%%%%%%% SIGNALS & SLOTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         self.JogUpButton.clicked.connect(self.jogup)
+        
         self.JogDownButton.clicked.connect(self.jogdown)
+        
         self.StepModelButton.clicked.connect(self.get_step)
+        
         self.BodeModelButton.clicked.connect(self.get_bode)
+        
         self.OpenDirectoryButton.clicked.connect(self.open_directory)
+        
         self.StartButton.toggled.connect(self.start)
+        
         self.GenerateFileButton.clicked.connect(self.create_csv_file)
+        
         self.OpenPython.clicked.connect(self.open_python_interpreter)
+        
+        self.SampleCount.returnPressed.connect(self.update_data_params)
+        
+        self.SampleRate.returnPressed.connect(self.update_data_params)
+        
+        self.Duration.returnPressed.connect(self.update_data_params)
+        #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
     def get_step(self):
         
@@ -60,7 +78,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         fileout = open(output_string,"w")
         fileout.write('Hello World')
         
-    def get_current_working_directory(self):
+    def get_current_working_directory(self): 
         
         return os.curdir
         
@@ -114,4 +132,11 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         den = map(float,denominator.split(","))
         
         return num,den
+        
+    def update_data_params(self):
+        
+        sample_rate = float(self.SampleRate.text())
+        sample_count = float(self.SampleCount.text())
+        duration = sample_count / sample_rate
+        self.Duration.setText(str(duration))
             
