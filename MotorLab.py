@@ -452,7 +452,7 @@ class Ui_Motorlab(object):
         font.setBold(False)
         font.setWeight(50)
         self.PlotAutoFormatCheckBox.setFont(font)
-        self.PlotAutoFormatCheckBox.setChecked(True)
+        self.PlotAutoFormatCheckBox.setChecked(False)
         self.PlotAutoFormatCheckBox.setObjectName(_fromUtf8("PlotAutoFormatCheckBox"))
         self.horizontalLayout_5.addWidget(self.PlotAutoFormatCheckBox)
         self.ExperimentCheckBox = QtGui.QCheckBox(self.horizontalLayoutWidget_5)

@@ -27,6 +27,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.OpenDirectoryButton.clicked.connect(self.open_directory)
         self.StartButton.toggled.connect(self.start)
         self.GenerateFileButton.clicked.connect(self.create_csv_file)
+        self.OpenPython.clicked.connect(self.open_python_interpreter)
         
     def get_step(self):
         self.get_graph = plot_tools()
@@ -87,11 +88,21 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             current_working_directory = self.get_current_working_directory()
             os.startfile(current_working_directory)
         #TODO: Have this work for Linux and OSX
+            
+    def open_python_interpreter(self):
+        if sys.platform == 'win32':
+            os.system("start cmd /c python")
     
     def start(self,checked):
         
-        if checked: self.StartButton.setText('Stop')
-        elif not checked: self.StartButton.setText('Start')
+        if checked: 
+            self.StartButton.setText('Stop')
+            self.DataExplorer.setText('MotorLab is running...')
+        elif not checked: 
+            self.StartButton.setText('Start')
+            self.DataExplorer.setText('MotorLab stopped')
+            
+        
             
     def transferfunction(self):
     

@@ -12,8 +12,6 @@ from MotorLab import Ui_Motorlab
 
 import matplotlib.pyplot as plt
 
-
-
 from scipy import signal
 # ***************************************************************************#
 # ***************************************************************************#
@@ -27,20 +25,22 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         
         w, mag, phase = signal.bode((num,den))
         
+        constant_line_gain = [0]*w
+        
         # Plot Formatting
         plt.ion()
         plt.close(2)
         f, axarr = plt.subplots(2, sharex=True)
         plt.subplot(211)
         plt.semilogx(w,mag,'dodgerblue')
+        plt.semilogx(w,constant_line_gain,color='grey',linestyle='-.')
+            
         plt.title('Bode Diagram')
         plt.ylabel('Magnitude (dB)')
-        plt.grid(True, which="both")
         plt.subplot(212)
-        plt.semilogx(w, phase,'dodgerblue')  
+        plt.semilogx(w, phase,'dodgerblue')
         plt.ylabel('Phase (Deg)')
         plt.xlabel('Frequency (rad/s)')
-        plt.grid(True, which="both")
         plt.figure(2)
         
         return plt.show()
