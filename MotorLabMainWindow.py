@@ -48,24 +48,10 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.Duration.returnPressed.connect(self.update_data_params)
         
         self.PlotDataButton.clicked.connect(self.get_data_plot)
+        
+        self.OpenFlashDir.clicked.connect(self.open_flash_directory)
         #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-    def get_step(self):
-        
-        self.get_graph = plot_tools()
-        num,den = self.transferfunction()
-        
-        if self.PlotAutoFormatCheckBox.isChecked(): self.get_graph.stepmodel2(num,den)
-        else: self.get_graph.stepmodel(num,den)
-        
-    def get_bode(self):
-        
-        num,den = self.transferfunction()
-        self.get_graph = plot_tools()
-        
-        if self.PlotAutoFormatCheckBox.isChecked(): self.get_graph.bode2(num,den)
-        else: self.get_graph.bode(num,den)
             
     def change_directory(self,current_directory):
         
@@ -108,7 +94,15 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             row += 1
         
         workbook.close()        
-        self.DataExplorer.setText('Generating  ' + output_string + '\n' + 'Success!')   
+        self.DataExplorer.setText('Generating  ' + output_string + '\n' + 'Success!')  
+        
+    def get_bode(self):
+        
+        num,den = self.transferfunction()
+        self.get_graph = plot_tools()
+        
+        if self.PlotAutoFormatCheckBox.isChecked(): self.get_graph.bode2(num,den)
+        else: self.get_graph.bode(num,den)
         
     def get_current_working_directory(self): 
         
@@ -136,6 +130,14 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             self.get_graph.fitdata(current,output_data)
         else:
             self.get_graph.plotdata(current,output_data)
+            
+    def get_step(self):
+        
+        self.get_graph = plot_tools()
+        num,den = self.transferfunction()
+        
+        if self.PlotAutoFormatCheckBox.isChecked(): self.get_graph.stepmodel2(num,den)
+        else: self.get_graph.stepmodel(num,den)
         
     def jogdown(self):
         
@@ -172,6 +174,12 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             message = QtGui.QMessageBox()
             message.setText('OS currently not supported')
             
+    def open_flash_directory(self):
+        
+        current_directory = self.get_current_working_directory()
+        path = str(QFileDialog.getOpenFileName(self,"Select .bin file",directory = current_directory))
+        self.FlashMotorLabDir.setText(path)
+
     def open_python_interpreter(self):
         
         if sys.platform == 'win32':
