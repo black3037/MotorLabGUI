@@ -11,6 +11,8 @@ from plot_tools import plot_tools
 import os
 
 import sys
+
+import csv
 # ***************************************************************************#
 # ***************************************************************************#
 
@@ -44,6 +46,8 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.SampleRate.returnPressed.connect(self.update_data_params)
         
         self.Duration.returnPressed.connect(self.update_data_params)
+        
+        self.PlotDataButton.clicked.connect(self.get_data_plot)
         #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
@@ -70,17 +74,68 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.DataExplorer.setText(output_text_to_dataexplorer)
 
     def create_csv_file(self):
-        
+        import xlsxwriter
         self.DataExplorer.clear()
-        output_string = str(self.FileName.text()) + '.csv'
-        self.DataExplorer.setText('Generating  ' + output_string + '\n' + 'Success!')   
+        output_string = str(self.FileName.text()) + '.xlsx'        
         
-        fileout = open(output_string,"w")
-        fileout.write('Hello World')
+        workbook = xlsxwriter.Workbook(output_string)
+        worksheet = workbook.add_worksheet()
+        
+        # Placeholder data for now...
+        current = [-0.12,-0.10,-0.08,-0.06,-0.03,0,0.03,0.06,0.08,0.10,0.12]
+        output_data = [-3080*(2*3.14/60),
+                       -2000*(2*3.14/60),
+                       -950*(2*3.14/60),
+                       0,
+                       0,
+                       0,
+                       0,
+                       0,
+                       920*(2*3.14/60),
+                       2030*(2*3.14/60),
+                       3220*(2*3.14/60)
+                       ] 
+        row,col = 0,0
+        
+        for i in current:
+            worksheet.write(row,col,i)
+            row += 1
+            if i == current[-1]:
+                row = 0
+        
+        for j in output_data:
+            worksheet.write(row,col+1,j)
+            row += 1
+        
+        workbook.close()        
+        self.DataExplorer.setText('Generating  ' + output_string + '\n' + 'Success!')   
         
     def get_current_working_directory(self): 
         
         return os.curdir
+        
+    def get_data_plot(self):
+        
+        self.get_graph = plot_tools()
+        
+        current = [-0.12,-0.10,-0.08,-0.06,-0.03,0,0.03,0.06,0.08,0.10,0.12]
+        output_data = [-3080*(2*3.14/60),
+                       -2000*(2*3.14/60),
+                       -950*(2*3.14/60),
+                       0,
+                       0,
+                       0,
+                       0,
+                       0,
+                       920*(2*3.14/60),
+                       2030*(2*3.14/60),
+                       3220*(2*3.14/60)
+                       ] 
+        
+        if self.FitDataCheckBox.isChecked():
+            self.get_graph.fitdata(current,output_data)
+        else:
+            self.get_graph.plotdata(current,output_data)
         
     def jogdown(self):
         
@@ -103,11 +158,19 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.Command.setText(increment_up)
         
     def open_directory(self):
-    
-        if sys.platform == 'win32':
-            current_working_directory = self.get_current_working_directory()
+        
+        current_working_directory = self.get_current_working_directory()
+        
+        if sys.platform == 'win32': 
             os.startfile(current_working_directory)
-        #TODO: Have this work for Linux and OSX
+            
+        elif sys.platform =='darwin':
+            import subprocess 
+            subprocess.Popen(['open',current_working_directory])
+            
+        else: 
+            message = QtGui.QMessageBox()
+            message.setText('OS currently not supported')
             
     def open_python_interpreter(self):
         

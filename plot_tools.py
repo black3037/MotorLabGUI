@@ -13,6 +13,8 @@ from MotorLab_Ui import Ui_Motorlab
 import matplotlib.pyplot as plt
 
 from scipy import signal
+
+from LinearRegression import LinearRegression
 # ***************************************************************************#
 # ***************************************************************************#
 
@@ -27,15 +29,12 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         
         constant_line_gain = [0]*w
         
-        # Plot Formatting
         plt.figure("Bode")
         plt.ion()
-        #plt.close("Bode")
         f, axarr = plt.subplots(2, sharex=True)
         plt.subplot(211)
         plt.semilogx(w,mag,'dodgerblue')
         plt.semilogx(w,constant_line_gain,color='grey',linestyle='-.')
-            
         plt.title('Bode Diagram')
         plt.ylabel('Magnitude (dB)')
         plt.subplot(212)
@@ -49,10 +48,8 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         
         w, mag, phase = signal.bode((num,den))
         
-        # Plot formatting
         plt.figure("Bode")
         plt.ion()
-        #plt.close("Bode")
         plt.rc('font', family='serif')
         plt.rc('xtick', labelsize='x-small')
         plt.rc('ytick', labelsize='x-small')    
@@ -71,7 +68,26 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         
         return plt.show()
         
-    def plotdata(self,x,y):
+    def plotdata(self,*argv):
+        
+        x,y = argv[0],argv[1]
+        plt.scatter(y,x)
+        return plt.show()
+        
+    def fitdata(self,*argv):
+        
+        x,y = argv[0],argv[1]
+        [x1,x2] = LinearRegression(x,y)
+                
+        y_fit = []
+        for fit in y:
+            y_fit.append( x1 + x2*fit )    
+            
+        plt.scatter(y,x)
+        plt.plot(y_fit,x)
+        return plt.show()
+        
+    def plotcompare(self,*argv):
         
         return plt.show()
     
@@ -82,11 +98,11 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         #TODO: Note this messes up for unstable or oscillatory systems
         get_last_value = y[-1]
         dcgain = [get_last_value]*len(t)
-     
-        # Plot Formatting
+        upper_limit_error = get_last_value + 0.02 * get_last_value
+        lower_limit_error = get_last_value - 0.02 * get_last_value
+      
         plt.figure("Step Response")
         plt.ion()
-        #plt.close("Step Response")
         plt.plot(t,y,'dodgerblue',t,dcgain,'k:')
         plt.xlabel('Time (seconds)')
         plt.ylabel('Amplitude')
@@ -101,11 +117,11 @@ class plot_tools(QMainWindow, Ui_Motorlab):
         #TODO: Note this messes up for unstable or oscillatory systems
         get_last_value = y[-1]
         dcgain = [get_last_value]*len(t)
-        
-        # Plot Formatting
+        upper_limit_error = get_last_value + 0.02 * get_last_value
+        lower_limit_error = get_last_value - 0.02 * get_last_value
+
         plt.figure("Step Response")  
         plt.ion()
-        #plt.close("Step Response")
         plt.rc('font', family='serif')
         plt.rc('xtick', labelsize='x-small')
         plt.rc('ytick', labelsize='x-small')     
