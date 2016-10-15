@@ -1,5 +1,5 @@
-# ********************************IMPORTS************************************#
-# ***************************************************************************#
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 from PyQt4 import QtGui
 
 from PyQt4.QtGui import QMainWindow, QColor, QFileDialog
@@ -11,10 +11,8 @@ from plot_tools import plot_tools
 import os
 
 import sys
-
-import csv
-# ***************************************************************************#
-# ***************************************************************************#
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
     def __init__(self):
@@ -37,7 +35,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         
         self.StartButton.toggled.connect(self.start)
         
-        self.GenerateFileButton.clicked.connect(self.create_csv_file)
+        self.GenerateFileButton.clicked.connect(self.create_xlsx_file)
         
         self.OpenPython.clicked.connect(self.open_python_interpreter)
         
@@ -59,13 +57,9 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         output_text_to_dataexplorer = 'Directory Changed To: \n' + text        
         self.DataExplorer.setText(output_text_to_dataexplorer)
 
-    def create_csv_file(self):
-        import xlsxwriter
-        self.DataExplorer.clear()
-        output_string = str(self.FileName.text()) + '.xlsx'        
+    def create_xlsx_file(self):
         
-        workbook = xlsxwriter.Workbook(output_string)
-        worksheet = workbook.add_worksheet()
+        import xlsxwriter
         
         # Placeholder data for now...
         current = [-0.12,-0.10,-0.08,-0.06,-0.03,0,0.03,0.06,0.08,0.10,0.12]
@@ -81,6 +75,12 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
                        2030*(2*3.14/60),
                        3220*(2*3.14/60)
                        ] 
+        
+        self.DataExplorer.clear()
+        output_string = str(self.FileName.text()) + '.xlsx'        
+        
+        workbook = xlsxwriter.Workbook(output_string)
+        worksheet = workbook.add_worksheet()
         row,col = 0,0
         
         for i in current:
@@ -94,15 +94,21 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             row += 1
         
         workbook.close()        
-        self.DataExplorer.setText('Generating  ' + output_string + '\n' + 'Success!')  
+        self.DataExplorer.setText('Generating  ' + output_string + '\n' + 'Success!')
+
         
     def get_bode(self):
         
         num,den = self.transferfunction()
         self.get_graph = plot_tools()
         
-        if self.PlotAutoFormatCheckBox.isChecked(): self.get_graph.bode2(num,den)
-        else: self.get_graph.bode(num,den)
+        if self.PlotAutoFormatCheckBox.isChecked(): 
+            
+            self.get_graph.bode2(num,den)
+        
+        else: 
+            
+            self.get_graph.bode(num,den)
         
     def get_current_working_directory(self): 
         
@@ -127,8 +133,11 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
                        ] 
         
         if self.FitDataCheckBox.isChecked():
+            
             self.get_graph.fitdata(current,output_data)
+            
         else:
+            
             self.get_graph.plotdata(current,output_data)
             
     def get_step(self):
@@ -136,26 +145,27 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.get_graph = plot_tools()
         num,den = self.transferfunction()
         
-        if self.PlotAutoFormatCheckBox.isChecked(): self.get_graph.stepmodel2(num,den)
-        else: self.get_graph.stepmodel(num,den)
+        if self.PlotAutoFormatCheckBox.isChecked(): 
+            
+            self.get_graph.stepmodel2(num,den)
+            
+        else: 
+            
+            self.get_graph.stepmodel(num,den)
         
     def jogdown(self):
         
-        # Get the current step size and current command
         step = float(self.StepSize.text())
         command = float(self.Command.text())
         
-        # Incrememnt command based on stepsize and print to screen
         increment_down = str(command - step)
         self.Command.setText(increment_down)
         
     def jogup(self):
         
-        # Get the current step size and current command
         step = float(self.StepSize.text())
         command = float(self.Command.text())
         
-        # Incrememnt command based on stepsize and print to screen
         increment_up = str(command + step)
         self.Command.setText(increment_up)
         
@@ -164,15 +174,19 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         current_working_directory = self.get_current_working_directory()
         
         if sys.platform == 'win32': 
+            
             os.startfile(current_working_directory)
             
         elif sys.platform =='darwin':
+            
             import subprocess 
             subprocess.Popen(['open',current_working_directory])
             
         else: 
+            
             message = QtGui.QMessageBox()
             message.setText('OS currently not supported')
+            message.setWindowTitle('Warning')
             
     def open_flash_directory(self):
         
@@ -183,14 +197,25 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
     def open_python_interpreter(self):
         
         if sys.platform == 'win32':
+            
             os.system("start cmd /c python")
+            
+        elif sys.platform == 'darwin':
+            
+            warning = QtGui.QMessageBox()
+            warning.setText("Sorry! Still needs implementation on OSX")
+            warning.setWindowTitle('Warning')
+            warning.exec_()
     
     def start(self,checked):
         
         if checked: 
+            
             self.StartButton.setText('Stop')
             self.DataExplorer.setText('MotorLab is running...')
+            
         elif not checked: 
+            
             self.StartButton.setText('Start')
             self.DataExplorer.setText('MotorLab stopped')
             
