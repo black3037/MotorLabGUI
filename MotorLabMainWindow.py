@@ -113,7 +113,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
     def get_current_working_directory(self): 
         
         return os.curdir
-        
+             
     def get_data_plot(self):
         
         self.get_graph = plot_tools()
@@ -139,6 +139,10 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         else:
             
             self.get_graph.plotdata(current,output_data)
+            
+    def get_directory_to_flash(self):
+        
+            return self.FlashMotorLabDir.text()
             
     def get_step(self):
         
@@ -206,6 +210,21 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             warning.setText("Sorry! Still needs implementation on OSX")
             warning.setWindowTitle('Warning')
             warning.exec_()
+            
+        elif sys.platform == 'linux2':
+            
+            warning = QtGui.QMessageBox()
+            warning.setText("Sorry! Still needs implementation on Linux")
+            warning.setWindowTitle('Warning')
+            warning.exec_()
+            
+        else:
+            
+            warning = QtGui.QMessageBox()
+            warning.setText("Sorry! Still needs implementation on this OS")
+            warning.setWindowTitle('Warning')
+            warning.exec_()
+            
     
     def start(self,checked):
         
