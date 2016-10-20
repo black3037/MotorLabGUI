@@ -40,9 +40,7 @@ Linked      MotorLab_Ui.py
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 from PyQt4.QtGui import QApplication, QSplashScreen, QPixmap
 
-import sys, time
-
-import os
+import sys
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 """ 
@@ -54,20 +52,28 @@ Start up the GUI
 """
 # Get randomly generated temporary path set by executable
 if __name__ == "__main__":
+    
     if getattr(sys, 'frozen', None):
+        
         basedir = sys._MEIPASS
+        
     else:
-	  basedir = os.path.dirname(__file__)
+        
+        import os
+        
+        basedir = os.path.dirname(__file__)
+    
 
     # Create and display the splash screen
     directory_to_image = str(basedir) + '\Data\splash_loading.png'
-
     splashme = QApplication(sys.argv)
     splash_pix = QPixmap(directory_to_image)
     splash = QSplashScreen(splash_pix)
     splash.setMask(splash_pix.mask())
     splash.show()
     splashme.processEvents()
+    
+    import time
     time.sleep(3)
     
     app = QApplication(sys.argv)

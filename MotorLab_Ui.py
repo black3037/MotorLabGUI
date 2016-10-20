@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'motorlabuiv2.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 from PyQt4 import QtCore, QtGui
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -28,15 +24,19 @@ class Ui_Motorlab(object):
         Motorlab.setFixedSize(1004, 580)
         Motorlab.setAutoFillBackground(False)
         Motorlab.setDocumentMode(False)
-		
+        
+        import sys
         if getattr(sys, 'frozen', None):
-			import sys
+            
             basedir = sys._MEIPASS
+            
         else:
-			import os
-			basedir = os.path.dirname(__file__)
-
-    # Create and display the splash screen
+            
+            import os
+            
+            basedir = os.path.dirname(__file__)
+		
+        # Create and display the splash screen
         directory_to_image = str(basedir) + '\Data\motorlabicon.png'
         
         icon = QtGui.QIcon()

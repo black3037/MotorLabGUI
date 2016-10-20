@@ -2,7 +2,6 @@ from serial.tools import list_ports
 
 import serial
 
-
 class SerialTools(serial.Serial):
     
     def __init__(self):

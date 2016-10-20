@@ -2,17 +2,15 @@
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 from PyQt4 import QtGui
 
-from PyQt4.QtGui import QMainWindow, QColor, QFileDialog
+from PyQt4.QtGui import QMainWindow, QFileDialog
 
 from MotorLab_Ui import Ui_Motorlab
 
+from SerialCommunication import SerialOptions
+
 from plot_tools import plot_tools
 
-import os
-
 import sys
-
-from SerialCommunication import SerialOptions
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -103,7 +101,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
 
         
     def get_bode(self):
-        
+   
         num,den = self.transferfunction()
         self.get_graph = plot_tools()
         
@@ -117,9 +115,12 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         
     def get_current_working_directory(self): 
         
+        import os
+        
         return os.curdir
              
     def get_data_plot(self):
+          
         
         self.get_graph = plot_tools()
         
@@ -150,6 +151,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             return self.FlashMotorLabDir.text()
             
     def get_step(self):
+        
         
         self.get_graph = plot_tools()
         num,den = self.transferfunction()
@@ -184,11 +186,14 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         
         if sys.platform == 'win32': 
             
+            import os
+            
             os.startfile(current_working_directory)
             
         elif sys.platform =='darwin':
             
             import subprocess 
+            
             subprocess.Popen(['open',current_working_directory])
             
         else: 
@@ -196,6 +201,7 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             try:
                 
                 import subprocess 
+                
                 subprocess.Popen(['open',current_working_directory])
                 
             except:
