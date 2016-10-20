@@ -13,12 +13,12 @@ you will need a few python modules to continue.
 
 In addition to the .py files included in this package you will need:
 
-Matplotlib
-sys, os
-scipy
-numpy
-PyQt4
-PySerial
+#####Matplotlib
+#####sys, os
+#####scipy
+#####numpy
+#####PyQt4
+#####PySerial
 
 Python 2.7 was used in this development.
 
