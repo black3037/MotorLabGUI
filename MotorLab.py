@@ -30,6 +30,7 @@ Start File  MotorLab.py
 Linked      MotorLab_Ui.py
             MotorLabmainWindow.py
             plot_tools.py
+            SerialCommunication.py
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,15 +38,11 @@ Linked      MotorLab_Ui.py
 """
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-from PyQt4 import QtGui
-
-from PyQt4.QtCore import *
-
-from PyQt4.QtGui import *
-
-from MotorLabMainWindow import MotorLabMainWindow
+from PyQt4.QtGui import QApplication, QSplashScreen, QPixmap
 
 import sys, time
+
+import os
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 """ 
@@ -55,18 +52,25 @@ Start up the GUI
        
                                                                            
 """
+# Get randomly generated temporary path set by executable
 if __name__ == "__main__":
+    if getattr(sys, 'frozen', None):
+        basedir = sys._MEIPASS
+    else:
+	  basedir = os.path.dirname(__file__)
 
     # Create and display the splash screen
+    directory_to_image = str(basedir) + '\Data\splash_loading.png'
+
     splashme = QApplication(sys.argv)
-    splash_pix = QPixmap('splash_loading.png')
-    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+    splash_pix = QPixmap(directory_to_image)
+    splash = QSplashScreen(splash_pix)
     splash.setMask(splash_pix.mask())
     splash.show()
     splashme.processEvents()
     time.sleep(3)
     
-    app = QtGui.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     
     # Give GUI a theme
     # Some look better than others on different operating systems
@@ -87,8 +91,7 @@ if __name__ == "__main__":
         
         app.setStyle('cleanlooks')
         
-        
-        
+    from MotorLabMainWindow import MotorLabMainWindow      
     window = MotorLabMainWindow() # Create instance of Motor Main Window Class
     window.show()                 # Show the GUI to the end user
     splash.finish(window)         # Terminate splash after GUI is loaded

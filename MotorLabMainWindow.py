@@ -11,6 +11,8 @@ from plot_tools import plot_tools
 import os
 
 import sys
+
+from SerialCommunication import SerialOptions
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,7 +20,8 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
     def __init__(self):
         
         # Set up the MotorLab Ui
-        QMainWindow.__init__(self)
+        super(MotorLabMainWindow,self).__init__()
+        #QMainWindow.__init__(self)
         self.setupUi(self)
         
         #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,9 +51,11 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.PlotDataButton.clicked.connect(self.get_data_plot)
         
         self.OpenFlashDir.clicked.connect(self.open_flash_directory)
+        
+        self.RefreshComButton.clicked.connect(self.update_ports)
         #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            
+                
     def change_directory(self,current_directory):
         
         text,ok = QtGui.QInputDialog.getText(self,'Change Working Directory','Enter the full path to working directory:')
@@ -188,9 +193,16 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
             
         else: 
             
-            message = QtGui.QMessageBox()
-            message.setText('OS currently not supported')
-            message.setWindowTitle('Warning')
+            try:
+                
+                import subprocess 
+                subprocess.Popen(['open',current_working_directory])
+                
+            except:
+                
+                message = QtGui.QMessageBox()
+                message.setText('OS currently not supported')
+                message.setWindowTitle('Warning')
             
     def open_flash_directory(self):
         
@@ -199,32 +211,48 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         self.FlashMotorLabDir.setText(path)
 
     def open_python_interpreter(self):
+    
+        import subprocess
         
         if sys.platform == 'win32':
             
-            os.system("start cmd /c python")
+            try:
+                
+                subprocess.check_call('start python',shell=True)
+
+            except:
+                
+                warning = QtGui.QMessageBox()
+                warning.setText("Please check that Python is installed." \
+                " It is required for some functionality of this application")
+                warning.setWindowTitle('Warning')
+                warning.exec_()
             
         elif sys.platform == 'darwin':
             
-            warning = QtGui.QMessageBox()
-            warning.setText("Sorry! Still needs implementation on OSX")
-            warning.setWindowTitle('Warning')
-            warning.exec_()
+            # OSX has native python support, no error checking needed            
+            subprocess.Popen(['open','-a','Terminal','-n'])
+            subprocess.call(['python'])
             
         elif sys.platform == 'linux2':
             
             warning = QtGui.QMessageBox()
-            warning.setText("Sorry! Still needs implementation on Linux")
+            warning_message = 'Sorry! Still needs implementation on' + str(sys.platform)
+            warning.setText(warning_message)
             warning.setWindowTitle('Warning')
             warning.exec_()
             
         else:
             
             warning = QtGui.QMessageBox()
-            warning.setText("Sorry! Still needs implementation on this OS")
+            warning_message = 'Sorry! Still needs implementation on' + str(sys.platform)
+            warning.setText(warning_message)
             warning.setWindowTitle('Warning')
             warning.exec_()
             
+    def set_text_callback(self,output_string):
+
+        self.DataExplorer(output_string)
     
     def start(self,checked):
         
@@ -254,4 +282,21 @@ class MotorLabMainWindow(QMainWindow, Ui_Motorlab):
         sample_count = float(self.SampleCount.text())
         duration = sample_count / sample_rate
         self.Duration.setText(str(duration))
+        
+    def update_ports(self):
+                
+        self.DataExplorer.setText('Refreshing Communication Ports...')
+        
+        get_ports = SerialOptions()
+        ports = get_ports.getPorts()
+        
+        self.COMPortComboBox.clear()
+        self.COMPortComboBox.addItems(ports)
+        
+        self.DataExplorer.append('Found ports at:')
+        self.DataExplorer.append(str(ports))
+        self.DataExplorer.append('Select appropriate port from menu and connect')
+        
+        
+        
             

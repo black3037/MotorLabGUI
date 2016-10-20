@@ -4,8 +4,8 @@ Simple plotting tools for the MotorLab GUI
 
 
 """
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# ********************************IMPORTS************************************#
+# ***************************************************************************#
 from PyQt4.QtGui import QMainWindow
 
 from MotorLab_Ui import Ui_Motorlab
@@ -15,8 +15,8 @@ import matplotlib.pyplot as plt
 from scipy import signal
 
 from LinearRegression import LinearRegression
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# ***************************************************************************#
+# ***************************************************************************#
 
 class plot_tools(QMainWindow, Ui_Motorlab):
     def __init__(self):        
@@ -47,6 +47,7 @@ class plot_tools(QMainWindow, Ui_Motorlab):
     def bode2(self,num,den):
         
         w, mag, phase = signal.bode((num,den))
+        
         
         plt.figure("Bode")
         plt.ion()

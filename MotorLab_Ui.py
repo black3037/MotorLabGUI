@@ -28,8 +28,24 @@ class Ui_Motorlab(object):
         Motorlab.setFixedSize(1004, 580)
         Motorlab.setAutoFillBackground(False)
         Motorlab.setDocumentMode(False)
+		
+        if getattr(sys, 'frozen', None):
+			import sys
+            basedir = sys._MEIPASS
+        else:
+			import os
+			basedir = os.path.dirname(__file__)
+
+    # Create and display the splash screen
+        directory_to_image = str(basedir) + '\Data\motorlabicon.png'
+        
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(directory_to_image)), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Motorlab.setWindowIcon(icon)
+		
         self.centralWidget = QtGui.QWidget(Motorlab)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
+         
         self.ControllerGroup = QtGui.QGroupBox(self.centralWidget)
         self.ControllerGroup.setGeometry(QtCore.QRect(10, 320, 251, 131))
         font = QtGui.QFont()
@@ -832,6 +848,7 @@ class Ui_Motorlab(object):
         self.statusBar = QtGui.QStatusBar(Motorlab)
         self.statusBar.setObjectName(_fromUtf8("statusBar"))
         Motorlab.setStatusBar(self.statusBar)
+        
 
         self.retranslateUi(Motorlab)
         QtCore.QMetaObject.connectSlotsByName(Motorlab)
@@ -923,7 +940,7 @@ class Ui_Motorlab(object):
         self.DenominatorLabel2.setText(_translate("Motorlab", "Denominator", None))
         self.OpenFlashDir.setText(_translate("Motorlab", "...", None))
         self.FlashMotorLabDir.setText(_translate("Motorlab", "Flash .bat to Motorlab", None))
-        self.COMPortComboBox.setItemText(0, _translate("Motorlab", "COM1", None))
+        self.COMPortComboBox.setItemText(0, _translate("Motorlab", "", None))
         self.RefreshComButton.setText(_translate("Motorlab", "Refresh", None))
         self.ConnectComButton.setText(_translate("Motorlab", "Connect", None))
         self.FlashButton.setText(_translate("Motorlab", "Flash", None))
