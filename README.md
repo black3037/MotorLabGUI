@@ -1,5 +1,5 @@
 <p align="center">
-  <img/>![alt tag](https://github.com/black3037/MotorLabGUI/blob/master/Resources/splash_loading.png)
+  <img src="https://github.com/black3037/MotorLabGUI/blob/master/Resources/splash_loading.png" alt="motorlab"/>
 </p>
 
 
