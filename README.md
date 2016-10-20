@@ -2,9 +2,24 @@
   <img src="https://github.com/black3037/MotorLabGUI/blob/master/Resources/motorlabicon.png" alt="motorlab"/>
 </p>
 
-A multi-platform (Windows, OSX, Linux) graphical interface for designing and experimenting with controls on the 'Motorlab'.
+A multi-platform (Windows, OSX, Linux) graphical interface for designing and experimenting with controls.
 
 ## HOW TO DEPLOY A STAND-ALONE APPLICATION ON YOUR OPERATING SYSTEM
+
+#### WHAT YOU NEED BEFORE GETTING STARTED
+Stand-Alone applications for Windows, Linux, and OSX already exist in the folder 'Stand-Alone-Applications'.
+If you are needing to recompile these files (i.e. you made edits to the GUI or the files don't perform the way you wish them to be)
+you will need a few python modules to continue.
+
+In addition to the .py files included in this package you will need:
+Matplotlib
+sys, os
+scipy
+numpy
+PyQt4
+PySerial
+
+Python 2.7 was used in this development.
 
 ### WINDOWS
 
