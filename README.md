@@ -6,12 +6,13 @@ A multi-platform (Windows, OSX, Linux) graphical interface for designing and exp
 
 ## HOW TO DEPLOY A STAND-ALONE APPLICATION ON YOUR OPERATING SYSTEM
 
-#### WHAT YOU NEED BEFORE GETTING STARTED
+### WHAT YOU NEED BEFORE GETTING STARTED
 Stand-Alone applications for Windows, Linux, and OSX already exist in the folder 'Stand-Alone-Applications'.
 If you are needing to recompile these files (i.e. you made edits to the GUI or the files don't perform the way you wish them to be)
 you will need a few python modules to continue.
 
 In addition to the .py files included in this package you will need:
+
 Matplotlib
 sys, os
 scipy
@@ -21,7 +22,7 @@ PySerial
 
 Python 2.7 was used in this development.
 
-### WINDOWS
+#### WINDOWS
 
 Step 1: Download the full MotorLabGUI.zip file from GitHub.
 
@@ -38,7 +39,7 @@ It is important that you keep the same folder/file hierarchy that was downloaded
 certain files and folders in that directory. If all else fails, edit the .bat file to make sure it is locating the pyinstaller-develop
 folder. If that fails, you will need to edit the MotorLab.spec file and change the locations of the files it references.
 
-### OSX
+#### OSX
 
 Step 1: Download the full MotorLabGUI.zip file from GitHub.
 
@@ -48,7 +49,7 @@ Step 3: Navigate to folder 'Compilers'. Run the file 'CompileMotorLabOSX.sh'.
 
 Step 4: Done! The compiler will take a couple minutes to create your executable.
 
-### LINUX
+#### LINUX
 
 Still in development. However still do-able on your own. You will need to change the file hierarchy. Drag all files and folders and
 put them in the 'pyinstaller-develop' folder. In command line, type 'pyinstaller MotorLab.spec'. This should compile the stand-alone
