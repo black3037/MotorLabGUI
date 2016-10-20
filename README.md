@@ -1,3 +1,5 @@
+![alt tag](https://github.com/black3037/MotorLabGUI/blob/master/Resources/splash_loading.png)
+
 # MOTORLAB
 
 A multi-platform (Windows, OSX, Linux) graphical interface for designing and experimenting with controls on the 'Motorlab'.
