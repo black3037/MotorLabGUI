@@ -1,9 +1,5 @@
 <p align="center">
-<<<<<<< HEAD
   <img src="https://github.com/black3037/MotorLabGUI/blob/master/Resources/static_image_2" alt="motorlab"/>
-=======
-  <img src="https://github.com/black3037/MotorLabGUI/blob/master/Resources/motorlabicon.png" alt="motorlab"/>
->>>>>>> origin/master
 </p>
 
 A multi-platform (Windows, OSX, Linux) graphical interface for designing and experimenting with controls.
@@ -34,7 +30,9 @@ Step 2: Extract all files into a new folder (Can be called anything).
 
 Step 3: Navigate to the folder 'Compilers'. Run the file 'CompileMotorLabWindows.bat'.
 
-Step 4: Done! The compiler will take a couple minutes to create your executable.
+Step 4: Once the compiler is finished, navigate towards the pyinstaller-develop folder.
+
+Step 5: There should be a newly created folder 'dist'. The .exe is located there.
 
 Possible Errors:
 
@@ -51,7 +49,9 @@ Step 2: Extract all files into a new folder (Can be called anything).
 
 Step 3: Navigate to folder 'Compilers'. Run the file 'CompileMotorLabOSX.sh'.
 
-Step 4: Done! The compiler will take a couple minutes to create your executable.
+Step 4: Once the compiler is finished, navigate towards the pyinstaller-develop folder.
+
+Step 5: There should be a newly created folder 'dist'. The .app is located there.
 
 #### LINUX
 
