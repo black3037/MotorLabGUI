@@ -13,7 +13,7 @@ $$ | \_/ $$ | $$$$$$  |  $$ |    $$$$$$  |$$ |  $$ |$$$$$$$$\ $$ |  $$ |$$$$$$$ 
                                                                                                                                 
 MotorLab (c)
 Kansas State University
-Developers: Derek Black, Shane Smith, Dale Schinstock
+Developers: Derek Black
 MIT Open License
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
