@@ -1,9 +1,5 @@
 <p align="center">
-<<<<<<< HEAD
-  <img src="https://github.com/black3037/MotorLabGUI/blob/master/Resources/static_image_2" alt="motorlab"/>
-=======
-  <img src="https://github.com/black3037/MotorLabGUI/blob/master/Resources/static_image_2.png" alt="motorlab"/>
->>>>>>> origin/master
+  <img src="https://raw.githubusercontent.com/black3037/MotorLabGUI/master/Resources/new_motorlab_gui.PNG" alt="motorlab"/>
 </p>
 
 A multi-platform (Windows, OSX, Linux) graphical interface for designing and experimenting with controls.
